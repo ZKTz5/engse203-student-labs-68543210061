@@ -20,16 +20,16 @@
     "title": "Modern JavaScript Learning Dashboard",
     "status": "draft",
     "sourceOrigin": "course-starter",
-    "originalRepoUrl": "",
-    "originalCommit": "",
+    "originalRepoUrl": "https://github.com/ZKTz5/engse203-lab02-68543210061-6",
+    "originalCommit": "c6bec4e",
     "pullRequestUrl": "",
-    "submissionTag": "",
-    "testStatus": "not-tested",
+    "submissionTag": "lab-02-submission-v1",
+    "testStatus": "pass",
     "notes": "นำ Vite build output ที่มี index.html เข้า publish/",
     "pageUrl": "https://ZKTz5-github.github.io/engse203-student-labs-68543210061/labs/week-02/",
     "sourceUrl": "https://github.com/ZKTz5-github/engse203-student-labs-68543210061/tree/lab/week-02/labs/week-02/source",
-    "hasPublish": false,
-    "sourceEntries": 0
+    "hasPublish": true,
+    "sourceEntries": 12
   },
   {
     "week": "week-03",
