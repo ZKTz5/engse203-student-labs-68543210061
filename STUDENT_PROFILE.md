@@ -3,10 +3,10 @@
 | รายการ | ข้อมูล |
 |---|---|
 | รายวิชา | ENGSE203 การเขียนโปรแกรมสำหรับวิศวกรซอฟต์แวร์ |
-| รหัสนักศึกษา | STUDENT-ID |
-| ชื่อ-นามสกุล | ชื่อ-นามสกุล |
-| Section | SEC-X |
-| GitHub Username | GITHUB-USERNAME |
-| Repository | `engse203-student-labs-STUDENT-ID` |
-
-> ไฟล์นี้จะถูกปรับข้อมูลเมื่อรัน `npm run setup`
+| รหัสนักศึกษา | 68543210061 |
+| ชื่อ-นามสกุล | กฤตภาส มงคลคลี |
+| Section | SEC1 |
+| GitHub Username | ZKTz5-github |
+| Repository | `engse203-student-labs-68543210061` |
+| Mode | `migration` |
+| Pages Hub | https://ZKTz5-github.github.io/engse203-student-labs-68543210061/ |
