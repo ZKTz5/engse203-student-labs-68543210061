@@ -29,23 +29,23 @@
     "pageUrl": "https://ZKTz5-github.github.io/engse203-student-labs-68543210061/labs/week-02/",
     "sourceUrl": "https://github.com/ZKTz5-github/engse203-student-labs-68543210061/tree/lab/week-02/labs/week-02/source",
     "hasPublish": false,
-    "sourceEntries": 0
+    "sourceEntries": 1
   },
   {
     "week": "week-03",
     "title": "Responsive Web UI & Form Interaction",
-    "status": "draft",
+    "status": "ready",
     "sourceOrigin": "course-starter",
-    "originalRepoUrl": "",
-    "originalCommit": "",
+    "originalRepoUrl": "https://github.com/ZKTz5/engse203-lab03-68543210061-6",
+    "originalCommit": "9ffbea2",
     "pullRequestUrl": "",
-    "submissionTag": "",
-    "testStatus": "not-tested",
+    "submissionTag": "lab-03-submission-v1",
+    "testStatus": "pass",
     "notes": "Static site ต้องมี index.html ที่ publish root",
     "pageUrl": "https://ZKTz5-github.github.io/engse203-student-labs-68543210061/labs/week-03/",
     "sourceUrl": "https://github.com/ZKTz5-github/engse203-student-labs-68543210061/tree/lab/week-03/labs/week-03/source",
-    "hasPublish": false,
-    "sourceEntries": 0
+    "hasPublish": true,
+    "sourceEntries": 8
   },
   {
     "week": "week-04",
