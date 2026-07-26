@@ -38,14 +38,14 @@
     "sourceOrigin": "migrated-repository",
     "originalRepoUrl": "https://github.com/ZKTz5/engse203-lab03-68543210061-6",
     "originalCommit": "9ffbea2",
-    "pullRequestUrl": "https://github.com/ZKTz5/engse203-student-labs-68543210061/pull/3",
-    "submissionTag": "lab-03-submission-v1",
+    "pullRequestUrl": "https://github.com/ZKTz5/engse203-student-labs-68543210061/pull/4",
+    "submissionTag": "lab-03-submission-v2",
     "testStatus": "pass",
     "notes": "Static site ต้องมี index.html ที่ publish root",
     "pageUrl": "https://ZKTz5.github.io/engse203-student-labs-68543210061/labs/week-03/",
     "sourceUrl": "https://github.com/ZKTz5/engse203-student-labs-68543210061/tree/lab/week-03/labs/week-03/source",
     "hasPublish": true,
-    "sourceEntries": 8
+    "sourceEntries": 10
   },
   {
     "week": "week-04",
