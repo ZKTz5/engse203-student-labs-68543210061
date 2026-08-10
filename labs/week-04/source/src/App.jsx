@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import AppHeader from './components/AppHeader.jsx';
 import SummaryPanel from './components/SummaryPanel.jsx';
 import RequestForm from './components/RequestForm.jsx';
@@ -7,26 +8,29 @@ import { initialRequests } from './data/initialRequests.js';
 
 function App() {
   // TODO LAB4-R04: เปลี่ยน requests/statusFilter เป็น state
-  const requests = initialRequests;
-  const statusFilter = 'all';
+  const [requests, setRequests] = useState(initialRequests);
+  const [statusFilter, setStatusFilter] = useState('all');
 
   // TODO LAB4-R04: คำนวณ summary เป็น derived data
   const summary = {
     total: requests.length,
-    pending: 0,
-    inProgress: 0,
-    completed: 0,
+    pending: requests.filter(r => r.status === 'pending').length,
+    inProgress: requests.filter(r => r.status === 'in-progress').length,
+    completed: requests.filter(r => r.status === 'completed').length,
   };
 
   // TODO LAB4-R08: คำนวณ filteredRequests จาก requests + statusFilter
-  const filteredRequests = requests;
+  const filteredRequests = statusFilter === 'all'
+  ? requests
+  : requests.filter(request => request.status === statusFilter);
 
   function handleAddRequest(requestData) {
-    console.log('TODO add request', requestData);
+    const newRequest = {id: `Request-${Date.now()}`, ...requestData, status: 'pending'};
+    setRequests(currentRequests => [newRequest, ...currentRequests]);
   }
 
   function handleDeleteRequest(requestId) {
-    console.log('TODO delete request', requestId);
+    setRequests(currentRequests => currentRequests.filter(req => req.id !== requestId));
   }
 
   return (
@@ -42,7 +46,7 @@ function App() {
           <section className="panel" aria-labelledby="request-list-title">
             <div className="section-heading">
               <h2 id="request-list-title">รายการคำร้อง</h2>
-              <FilterBar value={statusFilter} onFilterChange={() => {}} />
+              <FilterBar value={statusFilter} onFilterChange={setStatusFilter} />
             </div>
             <RequestList
               requests={filteredRequests}
