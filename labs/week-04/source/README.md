@@ -70,7 +70,7 @@ npm run preview
 | TC-09 Mobile | แสดงผลบนหน้าจอขนาด 375px ได้ถูกต้อง และไม่มี horizontal scrollbar | Pass | ![TC09](/labs/week-04/evidence/image/TC09.png) |
 | TC-10 Keyboard | สามารถใช้แป้นพิมพ์เข้าถึง focus, label, error และ feedback ได้สมบูรณ์ | Pass | ![TC10](/labs/week-04/evidence/image/TC10.png) |
 | TC-11 Build | รันคำสั่ง `npm run build` และ `preview` ผ่านโดยไม่มีข้อผิดพลาด | Pass | ![TC11](/labs/week-04/evidence/image/TC11.png) |
-| TC-12 Pages | หน้าเว็บและ assets ทั้งหมดโหลดได้ครบถ้วนเมื่อทดสอบบน Incognito mode | Pass | TODO |
+| TC-12 Pages | หน้าเว็บและ assets ทั้งหมดโหลดได้ครบถ้วนเมื่อทดสอบบน Incognito mode | Pass | ![TC12](/labs/week-04/evidence/image/TC12.png) |
 
 ## Screenshots
 
