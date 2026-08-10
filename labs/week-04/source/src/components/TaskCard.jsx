@@ -1,11 +1,39 @@
-function TaskCard({ task }) {
+const categoryLabels = {
+  reading: 'อ่าน/ทบทวน',
+  coding: 'เขียนโค้ด',
+  review: 'ตรวจและอธิบาย',
+};
+
+const statusLabels = {
+  todo: 'ต้องทำ',
+  doing: 'กำลังทำ',
+  done: 'เสร็จแล้ว',
+};
+
+function TaskCard({ task, onDeleteTask }) {
   return (
     <article className="task-card">
       <div>
-        <span className={`badge status-${task.status}`}>{task.status}</span>
+        <div className="badge-row">
+          <span className={`badge status-${task.status}`}>
+            {statusLabels[task.status]}
+          </span>
+          {task.priority === 'high' && (
+            <span className="badge priority-high">สำคัญ</span>
+          )}
+        </div>
         <h3>{task.title}</h3>
-        <p>{task.category}</p>
+        <p>{categoryLabels[task.category]}</p>
       </div>
+
+      <button
+        className="danger-button"
+        type="button"
+        onClick={() => onDeleteTask(task.id)}
+        aria-label={`ลบงาน ${task.title}`}
+      >
+        ลบ
+      </button>
     </article>
   );
 }
