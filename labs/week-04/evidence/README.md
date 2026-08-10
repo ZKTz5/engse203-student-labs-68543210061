@@ -15,7 +15,7 @@
 | TC-09 | 375px | ไม่มี horizontal scroll | ![TC09](image/TC09.png) |
 | TC-10 | Keyboard | focus/label/error/feedback ใช้งานได้ | ![TC10](image/TC10.png) |
 | TC-11 | Build/preview | `npm run build` และ preview ผ่าน | ![TC11](image/TC11.png) |
-| TC-12 | Pages | Incognito โหลดหน้า/assets ครบ | Pass |
+| TC-12 | Pages | Incognito โหลดหน้า/assets ครบ | ![TC12](image/TC12.png) |
 
 - ภาพ desktop และ mobile 375px
     ![Desktop](image/Desktop.png)
