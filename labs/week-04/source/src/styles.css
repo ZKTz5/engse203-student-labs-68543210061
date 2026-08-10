@@ -49,3 +49,87 @@ form > button, .filter-active { border: 0; border-radius: .6rem; padding: .65rem
 
 /* TODO LAB4-R12: เพิ่ม focus-visible, aria-invalid และ state/badge styles */
 
+/* 1. Focus Visible (เพื่อการเข้าถึงด้วย Keyboard Navigation) */
+:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 1px;
+}
+
+/* 2. Aria-Invalid Style (เมื่อ Form Validation ไม่ผ่าน) */
+[aria-invalid="true"] {
+  border-color: #dc2626 !important;
+  background-color: #fef2f2;
+}
+
+[aria-invalid="true"]:focus-visible {
+  outline-color: #dc2626;
+}
+
+/* 3. Badge & Status Styles */
+.card-badges {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;                  /* ห้ามตั้ง width เป็น % หรือ px */
+  height: auto;                 /* ห้ามตั้ง height เป็น px */
+  padding: 4px 10px;            /* กำหนดระยะขอบด้านใน */
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.badge.status-pending {
+  background-color: #fef3c7;
+  color: #b45309;
+}
+
+.badge.status-in-progress {
+  background-color: #e0f2fe;
+  color: #0369a1;
+}
+
+.badge.status-completed {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.badge.priority-urgent {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.request-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  position: relative;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background-color: #f9fbfe;
+}
+
+.request-card button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
