@@ -25,7 +25,8 @@ function App() {
   : requests.filter(request => request.status === statusFilter);
 
   function handleAddRequest(requestData) {
-    const newRequest = {id: `Request-${Date.now()}`, ...requestData, status: 'pending'};
+    const nextId = `REQ-${String(requests.length + 1).padStart(3, '0')}`;
+    const newRequest = {id: nextId, ...requestData, status: 'pending'};
     setRequests(currentRequests => [newRequest, ...currentRequests]);
   }
 
