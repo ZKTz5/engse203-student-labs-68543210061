@@ -2,20 +2,30 @@
 
 ## ผู้จัดทำ
 
-- ชื่อ–นามสกุล: TODO
-- รหัสนักศึกษา: TODO
-- Section: TODO
+- ชื่อ–นามสกุล: กฤตภาส มงคลคลี
+- รหัสนักศึกษา: 68543210061-6
+- Section: 1
 
 ## URLs
 
-- Repository: TODO
+- Repository: https://github.com/ZKTz5/engse203-lab03-68543210061-6
 - Pull Request: TODO
 - GitHub Pages: TODO
 
 ## Component Tree
 
 ```text
-TODO: วาด App → child components และระบุ state owner
+App                                     [state: requests, statusFilter]
+├── AppHeader                           [props: title, subtitle]
+├── SummaryPanel                        [props: summary]
+│   └── (map) summary card              [key: summary field name]
+├── RequestForm                         [state: formData, errors, feedback]
+│   └── (props received: onAddRequest)
+└── section.panel (request list)
+    ├── FilterBar                       [props: value, onFilterChange]
+    └── RequestList                     [props: requests, onDeleteRequest]
+        └── (map) RequestCard           [key: request.id]
+                                        [props: request, onDeleteRequest]
 ```
 
 ## Setup และ Run
@@ -37,17 +47,17 @@ TODO: อธิบายว่าใคร owns requests/filter/form state, prop
 
 | Test ID | Actual Result | Pass/Fail | Evidence/Screenshot |
 |---|---|---|---|
-| TC-01 Initial | TODO | TODO | TODO |
-| TC-02 Controlled input | TODO | TODO | TODO |
-| TC-03 Invalid | TODO | TODO | TODO |
-| TC-04 Valid add | TODO | TODO | TODO |
-| TC-05 Filter | TODO | TODO | TODO |
-| TC-06 All | TODO | TODO | TODO |
-| TC-07 Empty | TODO | TODO | TODO |
-| TC-08 Delete | TODO | TODO | TODO |
-| TC-09 Mobile | TODO | TODO | TODO |
-| TC-10 Keyboard | TODO | TODO | TODO |
-| TC-11 Build | TODO | TODO | TODO |
+| TC-01 Initial | TODO | TODO | ![TC01](/labs/week-04/evidence/TC01.png) |
+| TC-02 Controlled input | TODO | TODO | ![TC02](/labs/week-04/evidence//TC02.png) |
+| TC-03 Invalid | TODO | TODO | ![TC03](/labs/week-04/evidence//TC03.png) |
+| TC-04 Valid add | TODO | TODO | ![TC04](/labs/week-04/evidence//TC04.png) |
+| TC-05 Filter | TODO | TODO | ![TC05](/labs/week-04/evidence//TC05.png) |
+| TC-06 All | TODO | TODO | ![TC06](/labs/week-04/evidence//TC06.png) |
+| TC-07 Empty | TODO | TODO | ![TC07](/labs/week-04/evidence//TC07.png) |
+| TC-08 Delete | TODO | TODO | ![TC08](/labs/week-04/evidence//TC08.png) |
+| TC-09 Mobile | TODO | TODO | ![TC09](/labs/week-04/evidence//TC09.png) |
+| TC-10 Keyboard | TODO | TODO | ![TC10](/labs/week-04/evidence//TC10.png) |
+| TC-11 Build | TODO | TODO | ![TC11](/labs/week-04/evidence//TC11.png) |
 | TC-12 Pages | TODO | TODO | TODO |
 
 ## Screenshots

@@ -50,17 +50,17 @@
   {
     "week": "week-04",
     "title": "React Campus Service Request",
-    "status": "draft",
+    "status": "ready",
     "sourceOrigin": "course-starter",
     "originalRepoUrl": "",
     "originalCommit": "",
     "pullRequestUrl": "",
-    "submissionTag": "",
-    "testStatus": "not-tested",
+    "submissionTag": "lab-04-submission-v1",
+    "testStatus": "pass",
     "notes": "React/Vite build output ต้องอยู่ใน publish/ ก่อนสร้าง Pages Hub",
     "pageUrl": "https://ZKTz5.github.io/engse203-student-labs-68543210061/labs/week-04/",
     "sourceUrl": "https://github.com/ZKTz5/engse203-student-labs-68543210061/tree/lab/week-04/labs/week-04/source",
-    "hasPublish": false,
-    "sourceEntries": 0
+    "hasPublish": true,
+    "sourceEntries": 13
   }
 ]
