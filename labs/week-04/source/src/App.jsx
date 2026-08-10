@@ -24,10 +24,16 @@ function App() {
   ? requests
   : requests.filter(request => request.status === statusFilter);
 
+  const [nextIdNum, setNextIdNum] = useState(initialRequests.length + 1);
+
   function handleAddRequest(requestData) {
-    const nextId = `REQ-${String(requests.length + 1).padStart(3, '0')}`;
-    const newRequest = {id: nextId, ...requestData, status: 'pending'};
-    setRequests(currentRequests => [newRequest, ...currentRequests]);
+  const nextId = `REQ-${String(nextIdNum).padStart(3, '0')}`;
+  const newRequest = { id: nextId, ...requestData, status: 'pending' };
+  
+  setRequests((currentRequests) => [newRequest, ...currentRequests]);
+  
+  // เพิ่มตัวนับขึ้นทีละ 1 เพื่อไม่ให้เลข ID ถอยหลังกลับไปซ้ำ
+  setNextIdNum((prev) => prev + 1);
   }
 
   function handleDeleteRequest(requestId) {
