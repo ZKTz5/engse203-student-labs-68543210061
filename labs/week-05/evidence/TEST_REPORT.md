@@ -1,6 +1,6 @@
 # ENGSE203 LAB05 — Student Test Report
 
-**ชื่อ–รหัส:** TODO  
+**ชื่อ–รหัส:** กฤตถาส มงคลคลี 68543210061-6
 **OS / Browser / Node:** TODO  
 **Branch / Commit:** `lab/week-05` / TODO
 
@@ -8,21 +8,21 @@
 
 | Test ID | Preconditions / procedure summary | Actual result | Status | Evidence / Notes |
 |---|---|---|---|---|
-| TC-L5-01 | เปิด `#/` | TODO | NOT RUN | |
-| TC-L5-02 | ใช้ navigation 3 รายการ | TODO | NOT RUN | |
-| TC-L5-03 | เปิด/refresh `#/requests/new` | TODO | NOT RUN | |
-| TC-L5-04 | เปิด `#/requests/REQ-001` | TODO | NOT RUN | `images/route-detail-found.png` |
-| TC-L5-05 | เปิด `#/requests/REQ-999` | TODO | NOT RUN | |
-| TC-L5-06 | เปิด `#/unknown` | TODO | NOT RUN | `images/route-not-found.png` |
+| TC-L5-01 | เปิด `#/` | แสดงหน้า Dashboard พร้อมข้อมูล คำร้อง | PASS ||
+| TC-L5-02 | ใช้ navigation 3 รายการ | แสดงหน้าตามที่ navigation กำหนด | PASS | |
+| TC-L5-03 | เปิด/refresh `#/requests/new` | TODO | PASS | |
+| TC-L5-04 | เปิด `#/requests/REQ-001` | TODO | PASS | ![route-detail-found](images/route-detail-found.png) |
+| TC-L5-05 | เปิด `#/requests/REQ-999` | TODO | PASS | |
+| TC-L5-06 | เปิด `#/unknown` | TODO | PASS | ![route-not-found](images/route-not-found.png) |
 | TC-L5-07 | ลบ LAB05 key แล้วเปิด Dashboard | TODO | NOT RUN | |
-| TC-L5-08 | สังเกตช่วง latency | TODO | NOT RUN | `images/state-loading.png` |
-| TC-L5-09 | เปิด `#/?scenario=error` | TODO | NOT RUN | `images/state-error-retry.png` |
-| TC-L5-10 | กด Retry | TODO | NOT RUN | |
-| TC-L5-11 | เปิด `#/?scenario=empty` | TODO | NOT RUN | `images/state-empty.png` |
+| TC-L5-08 | สังเกตช่วง latency | TODO | PASS | ![state-loading](images/state-loading.png) |
+| TC-L5-09 | เปิด `#/?scenario=error` | TODO | PASS | ![state-error-retry](images/state-error-retry.png) |
+| TC-L5-10 | กด Retry | TODO | PASS | |
+| TC-L5-11 | เปิด `#/?scenario=empty` | TODO | PASS | ![state-empty](images/state-empty.png) |
 | TC-L5-12 | รัน public checker | TODO | NOT RUN | command summary |
 | TC-L5-13 | submit form ผิด validation | TODO | NOT RUN | |
 | TC-L5-14 | เพิ่ม valid request แล้ว refresh | TODO | NOT RUN | `images/persistence-add-refresh.png` |
-| TC-L5-15 | ทดสอบ filters ทุกค่า | TODO | NOT RUN | |
+| TC-L5-15 | ทดสอบ filters ทุกค่า | TODO | PASS | |
 | TC-L5-16 | ลบ request แล้ว refresh | TODO | NOT RUN | `images/persistence-delete-refresh.png` |
 | TC-L5-17 | Reset Demo Data | TODO | NOT RUN | |
 | TC-L5-18 | malformed + wrong schema แล้ว reload | TODO | NOT RUN | `images/storage-recovery.png` |
