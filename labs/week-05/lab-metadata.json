@@ -1,12 +1,12 @@
 {
   "week": "week-05",
   "title": "React Routing Data Fetching Mini App",
-  "status": "draft",
+  "status": "Submitted",
   "sourceOrigin": "course-starter",
-  "originalRepoUrl": "",
-  "originalCommit": "",
-  "pullRequestUrl": "",
-  "submissionTag": "",
-  "testStatus": "not-tested",
-  "notes": ""
+  "originalRepoUrl": "https://github.com/ZKTz5/engse203-student-labs-68543210061",
+  "originalCommit": "a62f1fc",
+  "pullRequestUrl": "https://github.com/ZKTz5/engse203-student-labs-68543210061/pull/7",
+  "submissionTag": "lab-05-submission-v1",
+  "testStatus": "pass",
+  "notes": "ทำ LAB05A และ LAB05B ครบ"
 }

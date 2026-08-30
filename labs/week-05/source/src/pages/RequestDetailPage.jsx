@@ -14,18 +14,22 @@ function RequestDetailPage() {
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
+    let ignore = false;
     setLoadState('loading');
     setErrorMessage('');
 
     getRequestById(requestId)
       .then((result) => {
+        if (ignore) return;          // ไม่เกี่ยวแล้ว ทิ้งไปเลย
         setRequest(result);
         setLoadState('success');
       })
       .catch((error) => {
+        if (ignore) return;
         setErrorMessage(error instanceof Error ? error.message : 'โหลดรายละเอียดไม่สำเร็จ');
         setLoadState('error');
       });
+      return () => { ignore = true; };   // React เรียกตอนออกจากหน้า
     // TODO 5B: เพิ่ม cleanup guard เพื่อกัน stale update
   }, [requestId, reloadKey]);
 
