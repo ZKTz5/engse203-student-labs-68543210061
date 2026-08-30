@@ -100,8 +100,8 @@
 | **TC-L5-21** | วางเมาส์ไว้ข้าง ๆ ใช้ `Tab` `Shift+Tab` `Enter` `Space` เท่านั้น | เข้าถึงทุกลิงก์ ปุ่ม และช่องกรอกได้ · **เห็นชัดตลอดว่าโฟกัสอยู่ที่ไหน** | Focus ชัดเจน นำทางและกดส่งฟอร์มด้วยคีย์บอร์ดได้ทั้งหมด | PASS | |
 | **TC-L5-12** | `npm run check` | ผ่าน **133/133** | ได้ครบแต่ 136/136 | PASS | ![responsive-375](images/npm-run-check.png) |
 | **TC-L5-22** | `npm run build` แล้ว `npm run preview` | build ไม่มี error · เปิด preview แล้ว refresh ที่ทุก URL ได้ | build ไม่ error, preview แล้ว refresh ทุก URL ได้ | PASS | |
-| **TC-L5-23** | เปิด GitHub Pages **ในหน้าต่างส่วนตัว** แล้ว refresh ที่ URL ที่มี `#` | โหลดได้ทุกหน้า · refresh แล้วไม่ 404 · ข้อมูลตัวอย่างขึ้นเหมือนผู้ใช้ใหม่ | | NOT RUN | `images/pages-incognito.png` |
-| **TC-L5-24** | เปิด Pull Request และติด tag `lab-05-submission-v1` | PR เปิดแล้ว · tag ถูก push ขึ้น remote | | NOT RUN | URL ของ PR |
+| **TC-L5-23** | เปิด GitHub Pages **ในหน้าต่างส่วนตัว** แล้ว refresh ที่ URL ที่มี `#` | โหลดได้ทุกหน้า · refresh แล้วไม่ 404 · ข้อมูลตัวอย่างขึ้นเหมือนผู้ใช้ใหม่ | โหลดหน้าปกติ ไม่ขึ้น 404 | PASS | ![responsive-375](images/pages-incognito.png) |
+| **TC-L5-24** | เปิด Pull Request และติด tag `lab-05-submission-v1` | PR เปิดแล้ว · tag ถูก push ขึ้น remote |  | PASS | https://github.com/ZKTz5/engse203-student-labs-68543210061/pull/8 |
 
 ---
 
@@ -109,9 +109,9 @@
 
 | | จำนวน |
 |---|---|
-| PASS | 21 |
+| PASS | 23 |
 | FAIL | - |
-| NOT RUN | 3 |
+| NOT RUN | 1 |
 | **รวม** | **24** |
 
 **รายการที่ไม่ผ่าน และสิ่งที่ทำเพื่อแก้**

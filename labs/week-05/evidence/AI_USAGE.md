@@ -2,7 +2,7 @@
 
 | Tool / Resource | Purpose | Used portion | How I verified | My final decision |
 |---|---|---|---|---|
-| TODO หรือ `ไม่ได้ใช้` | TODO | TODO | source review / runtime test / ไม่เกี่ยวข้อง | TODO |
+| Gemini | ช่วยตรวจสอบและแนะนำการเขียน Cleanup Guard ใน useEffect และการตั้งค่า Schema Validation | โครงสร้าง Cleanup Guard ใน DashboardPage, RequestDetailPage และเงื่อนไขการตรวจจับ Schema ใน requestStorage.js | รัน npm run check (ผ่าน 136/136), ทดสอบ Slow 4G สลับหน้าตรวจ Stale Update และทดสอบ Recovery ด้วยค่า JSON เสียหายใน Local Storage | ปรับแก้ syntax และ callback logic ให้ตรงกับโค้ดจริงในโปรเจกต์ นำมาใช้งานตามแนวทางที่แนะนำ |
 
 คำรับรอง:
 
