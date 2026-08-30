@@ -12,7 +12,7 @@
  */
 
 // TODO 5B-1: เปิดใช้บรรทัดล่างนี้เมื่อถึงคาบ 5B
-// import { clearStoredRequests, readStoredRequests, writeStoredRequests } from './requestStorage.js';
+import { clearStoredRequests, readStoredRequests, writeStoredRequests } from './requestStorage.js';
 
 const LAB_DELAY_MS = 420;
 
@@ -71,7 +71,9 @@ export async function getRequests(options = {}) {
     return [];
   }
 
-  return fetchSeedRequests();
+  //return fetchSeedRequests();
+  return loadNormalRequests(options.onRecovery);
+
   // TODO 5B-3: เปลี่ยนบรรทัดข้างบนเป็น return loadNormalRequests(options.onRecovery);
 }
 
@@ -99,9 +101,20 @@ export async function getRequestById(requestId) {
  *   4. ถ้า status เป็น 'invalid' ให้เรียก onRecovery?.(ข้อความ) เพื่อให้หน้าจอแจ้งผู้ใช้
  *   5. คืนข้อมูล seed
  */
-// async function loadNormalRequests(onRecovery) {
-//   throw new Error('TODO 5B-2: loadNormalRequests');
-// }
+async function loadNormalRequests(onRecovery) {
+  const stored = readStoredRequests();
+  if (stored.status === 'valid') return stored.requests;
+
+  if (stored.status === 'invalid') {
+    onRecovery?.('พบข้อมูลเดิมที่อ่านไม่ได้ ระบบจึงกู้ข้อมูลตัวอย่างให้แล้ว');
+  }
+
+  const seedRequests = await fetchSeedRequests();
+  writeStoredRequests(seedRequests);
+  // TODO 5B-2b: แจ้งผู้ใช้เมื่อกู้ข้อมูลจากของเสีย (ทำใน CP04b)
+  return seedRequests;
+}
+//throw new Error('TODO 5B-2: loadNormalRequests');
 
 /**
  * TODO 5B-4 · เพิ่มคำร้องใหม่
@@ -114,8 +127,19 @@ export async function getRequestById(requestId) {
  *   5. persist แล้วคืน object ใหม่
  */
 export async function addRequest(requestInput) {
-  void requestInput;
-  throw new Error('TODO 5B-4: addRequest');
+  validateRequestInput(requestInput);
+  const requests = await getRequests();
+  const newRequest = {
+    id: createRequestId(requests),
+    requesterName: requestInput.requesterName.trim(),
+    requestType: requestInput.requestType,
+    location: requestInput.location.trim(),
+    details: requestInput.details.trim(),
+    priority: requestInput.priority,
+    status: 'pending',
+  };
+  writeStoredRequests([...requests, newRequest]);
+  return structuredClone(newRequest);
 }
 
 /**
@@ -123,15 +147,46 @@ export async function addRequest(requestInput) {
  * ใช้ .filter() สร้าง array ใหม่ อย่าแก้ array เดิม แล้ว persist
  */
 export async function deleteRequest(requestId) {
-  void requestId;
-  throw new Error('TODO 5B-5: deleteRequest');
+  const requests = await getRequests();
+  const nextRequests = requests.filter((request) => request.id !== requestId);
+  writeStoredRequests(nextRequests);
+  return structuredClone(nextRequests);
 }
+
 
 /**
  * TODO 5B-6 · คืนค่าข้อมูลตัวอย่างเริ่มต้น
  * ล้างคีย์ของ LAB05 แล้วโหลด seed ใหม่ทับ
  */
 export async function resetRequests() {
-  throw new Error('TODO 5B-6: resetRequests');
+  clearStoredRequests();
+  const seedRequests = await fetchSeedRequests();
+  writeStoredRequests(seedRequests);
+  return structuredClone(seedRequests);
 }
+
+
+function readText(value) {
+  return typeof value === 'string' ? value.trim() : '';
+}
+
+function validateRequestInput(input) {
+  if (!input) throw new Error('ข้อมูลคำร้องไม่ถูกต้อง');
+  if (readText(input.requesterName).length < 2) throw new Error('ชื่อผู้แจ้งไม่ถูกต้อง');
+  if (!readText(input.requestType)) throw new Error('กรุณาเลือกประเภทคำร้อง');
+  if (!readText(input.location)) throw new Error('กรุณาระบุสถานที่');
+  if (readText(input.details).length < 10) throw new Error('รายละเอียดต้องมีอย่างน้อย 10 ตัวอักษร');
+  if (!['normal', 'urgent'].includes(input.priority)) throw new Error('ความเร่งด่วนไม่ถูกต้อง');
+}
+
+function createRequestId(requests) {
+  let id;
+  do {
+    const time = Date.now().toString(36).toUpperCase();
+    const random = Math.random().toString(36).slice(2, 6).toUpperCase();
+    id = `REQ-${time}-${random}`;
+  } while (requests.some((request) => request.id === id));
+  return id;
+}
+
 
