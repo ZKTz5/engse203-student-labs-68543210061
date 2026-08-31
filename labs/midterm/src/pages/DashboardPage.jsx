@@ -62,7 +62,7 @@ function DashboardPage() {
   async function handleDelete(requestId) {
     try {
       const nextRequests = await deleteRequest(requestId);
-      setRequests(requests);
+      setRequests(nextRequests);
       setNotice(`ลบคำร้อง ${requestId} แล้ว`);
     } catch (error) {
       setNotice(error instanceof Error ? error.message : 'ลบคำร้องไม่สำเร็จ');
@@ -72,7 +72,8 @@ function DashboardPage() {
   async function handleReset() {
     if (!window.confirm('ต้องการคืนข้อมูลตัวอย่างเริ่มต้นหรือไม่?')) return;
     try {
-      setRequests(resetRequests());
+      const nextRequests = await resetRequests();
+      setRequests(nextRequests);
       setStatusFilter('all');
       setNotice('คืนข้อมูลตัวอย่างเริ่มต้นแล้ว');
     } catch (error) {

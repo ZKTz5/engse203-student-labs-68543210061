@@ -19,16 +19,16 @@
 - แก้อย่างไร:แก้ไข filter เป็น status === statusFilter เพื่อให้แสดงการ์ดที่มีาถานะตรงกับที่กดเท่านั้น
 
 ## บั๊กที่ 4 — อาการ: เปลี่ยน URL จาก REQ-001 เป็น REQ-002 แล้วข้อมูลไม่เปลี่ยน
-- ไฟล์/บรรทัด:
-- สาเหตุ:
-- แก้อย่างไร:
+- ไฟล์/บรรทัด:/src/pages/RequestDetailPage.jsx บรรทัดที่ 28
+- สาเหตุ:ที่หลัง useEffect มีแค่ [reloadKey] หากมีการเปลี่ยน URL requestId เปลี่ยนจริงแต่ React ไม่ได้เฝ้าดู โค้ดดึงข้อมูลจึงไม่ยอมทำงาน
+- แก้อย่างไร:ใส่ requestId เพิ่มใน [reloadKey] ทีนี้หาก requestId เปลี่ยน โค้ดดึงข้อมูลจะทำงานใหม่ทันที
 
 ## บั๊กที่ 5 — อาการ: กด "ลบ" แล้วรายการยังอยู่ ต้องรีเฟรชถึงหาย
-- ไฟล์/บรรทัด:
-- สาเหตุ:
-- แก้อย่างไร:
+- ไฟล์/บรรทัด:/src/pages/DashboardPage.jsx บรรทัดที่ 65
+- สาเหตุ:handleDelete ส่ง requests เข้าไปใน setRequests() แทนที่จะส่งข้อมูลชุดใหม่ ทำให้ React อัปเดตหน้าจอด้วยข้อมูลเก่า
+- แก้อย่างไร:เปลี่ยนเป็น setRequests(nextRequests) เพื่อนำ Array ชุดใหม่ที่ผ่านการลบแล้วจาก deleteRequest() ไปอัปเดตลง State ทันที
 
 ## บั๊กที่ 6 — อาการ: กด "Reset Demo Data" แล้วหน้าพัง/ว่างเปล่า
-- ไฟล์/บรรทัด:
-- สาเหตุ:
-- แก้อย่างไร:
+- ไฟล์/บรรทัด:/src/pages/DashboardPage.jsx บรรทัดที่ 75,76
+- สาเหตุ:resetRequests() เป็นฟังก์ชัน async แต่โค้ดที่เรียกใช้ไม่มี await ทำให้ส่ง Promise เข้าไปเก็บใน requests แทนที่จะเป็น Array
+- แก้อย่างไร:ใส่ await ข้างหน้า resetRequests() const nextRequests = await resetRequests(); setRequests(nextRequests);
