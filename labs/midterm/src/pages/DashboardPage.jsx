@@ -44,7 +44,7 @@ function DashboardPage() {
   const summary = useMemo(() => ({
     total: requests.length,
 
-    pending: requests.filter((request) => request.status === 'completed').length,
+    pending: requests.filter((request) => request.status === 'pending').length,
     inProgress: requests.filter((request) => request.status === 'in-progress').length,
     completed: requests.filter((request) => request.status === 'completed').length,
   }), [requests]);
@@ -52,7 +52,7 @@ function DashboardPage() {
   const filteredRequests = statusFilter === 'all'
     ? requests
 
-    : requests.filter((request) => request.status !== statusFilter);
+    : requests.filter((request) => request.status === statusFilter);
 
   function handleRetry() {
     if (scenario) setSearchParams({});
