@@ -10,7 +10,7 @@ function RequestCard({ request, onDeleteRequest, onMarkDone }) {
         <p>{request.location}</p>
         <p>{request.details}</p>
         {/* TODO B4: แทน {request.priority} ด้านล่างด้วย <PriorityBadge priority={request.priority} /> ที่คุณสร้าง */}
-        <p><span className={`badge ${request.status}`}>{request.status}</span> · {request.priority}</p>
+        <p><span className={`badge ${request.status}`}>{request.status}</span> · <PriorityBadge priority={request.priority} /></p>
       </div>
       <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'flex-start' }}>
         {request.status !== 'completed' && (
