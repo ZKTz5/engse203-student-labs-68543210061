@@ -12,14 +12,16 @@ function RequestCard({ request, onDeleteRequest, onMarkDone }) {
         <p><span className={`badge ${request.status}`}>{request.status}</span> · {request.priority}</p>
       </div>
       <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'flex-start' }}>
-        <button
-          className="button secondary"
-          type="button"
-          onClick={() => onMarkDone?.(request.id)}
-          aria-label={`ทำเครื่องหมายเสร็จสิ้น ${request.id}`}
-        >
-          เสร็จสิ้น
-        </button>
+        {request.status !== 'completed' && (
+          <button
+            className="button secondary"
+            type="button"
+            onClick={() => onMarkDone?.(request.id)}
+            aria-label={`ทำเครื่องหมายเสร็จสิ้น ${request.id}`}
+          >
+            เสร็จสิ้น
+          </button>
+        )}
         <button
           className="button danger"
           type="button"
