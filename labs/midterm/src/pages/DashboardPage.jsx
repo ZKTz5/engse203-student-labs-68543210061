@@ -51,13 +51,19 @@ function DashboardPage() {
   }), [requests]);
 
   const filteredRequests = requests.filter((request) => {
-  const query = searchTerm.trim().toLowerCase();
-  const matchesSearch =
-    query === '' ||
-    request.requesterName.toLowerCase().includes(query) ||
-    request.details.toLowerCase().includes(query);
+    // 1. เงื่อนไขสถานะ (ถ้าเลือก 'all' หรือสถานะตรงกับปุ่มที่กด)
+    const matchesStatus =
+      statusFilter === 'all' || request.status === statusFilter;
 
-  return matchesSearch;
+    // 2. เงื่อนไขคำค้นหา
+    const query = searchTerm.trim().toLowerCase();
+    const matchesSearch =
+      query === '' ||
+      request.requesterName.toLowerCase().includes(query) ||
+      request.details.toLowerCase().includes(query);
+
+    // ต้องผ่านทั้งสองเงื่อนไข
+    return matchesStatus && matchesSearch;
   });
 
   function handleRetry() {
