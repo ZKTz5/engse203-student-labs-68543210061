@@ -7,6 +7,7 @@ import RequestList from '../components/RequestList.jsx';
 import SummaryPanel from '../components/SummaryPanel.jsx';
 import useManualReload from '../hooks/useManualReload.js';
 import { deleteRequest, getRequests, resetRequests, updateRequestStatus} from '../services/requestService.js';
+import PriorityBadge from '../components/PriorityBadge.jsx';
 
 function DashboardPage() {
   const [searchParams, setSearchParams] = useSearchParams();
