@@ -35,7 +35,8 @@ export function getRequest(req, res) {
  * ⚠ POST สำเร็จตอบ 201 ไม่ใช่ 200
  */
 export function createRequest(req, res) {
-  throw new Error('TODO W06-C3: createRequest');
+  const newRequest = service.create(req.body);
+  res.status(201).json(newRequest);
 }
 
 /**
@@ -52,5 +53,9 @@ export function updateRequestStatus(req, res) {
  * - ไม่พบ → 404 · ลบสำเร็จ → 204 (ไม่มีข้อมูลส่งกลับ ใช้ res.status(204).end())
  */
 export function deleteRequest(req, res) {
-  throw new Error('TODO W06-C5: deleteRequest');
+  const deleted = service.remove(req.params.id);
+  if (!deleted) {
+    return res.status(404).json({ error: `ไม่พบคำร้องรหัส ${req.params.id}` });
+  }
+  res.status(204).end();
 }

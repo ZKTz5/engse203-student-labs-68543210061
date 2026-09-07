@@ -48,7 +48,17 @@ function createId() {
  *        → status เริ่มต้นเป็น 'pending' เสมอ → push เข้า requests → คืนสำเนา
  */
 export function create(input) {
-  throw new Error('TODO W06-S3: create');
+  const newRequest = {
+    id: createId(),
+    requesterName: input.requesterName.trim(),
+    requestType: input.requestType,
+    location: input.location.trim(),
+    details: input.details.trim(),
+    priority: input.priority,
+    status: 'pending',     // เริ่มต้นเป็น pending เสมอ
+  };
+  requests.push(newRequest);
+  return structuredClone(newRequest);
 }
 
 /**
@@ -65,5 +75,7 @@ export function updateStatus(id, status) {
  * - ใช้ .filter() สร้าง array ใหม่ อย่าแก้ array เดิม
  */
 export function remove(id) {
-  throw new Error('TODO W06-S5: remove');
+  const before = requests.length;
+  requests = requests.filter((r) => r.id !== id);
+  return requests.length < before;
 }

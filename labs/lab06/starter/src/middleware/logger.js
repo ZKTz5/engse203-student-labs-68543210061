@@ -13,5 +13,10 @@
  * ⚠ ถ้าลืมเรียก next() คำขอจะค้าง ไม่มีวันถึง handler
  */
 export function logger(req, res, next) {
-  throw new Error('TODO W06-M1: logger');
+  const start = Date.now();
+  res.on('finish', () => {
+    const ms = Date.now() - start;
+    console.log(`${req.method} ${req.originalUrl} → ${res.statusCode} (${ms}ms)`);
+  });
+  next();
 }
