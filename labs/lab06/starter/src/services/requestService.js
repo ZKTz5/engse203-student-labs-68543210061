@@ -18,7 +18,8 @@ export async function loadSeed() {
  * TODO W06-S1b (⭐ Challenge) · ถ้ามี options.status ให้กรองเฉพาะสถานะนั้น
  */
 export function findAll({ status } = {}) {
-  throw new Error('TODO W06-S1: findAll');
+  if (!status) return structuredClone(requests);
+  return structuredClone(requests.filter((r) => r.status === status));
 }
 
 /**
@@ -26,7 +27,8 @@ export function findAll({ status } = {}) {
  * - ถ้าไม่พบให้คืน null (ห้าม throw — controller จะเป็นคนตัดสินว่าตอบ 404)
  */
 export function findById(id) {
-  throw new Error('TODO W06-S2: findById');
+  if (id) return structuredClone(requests.find((r) => r.id === id)) || null;
+  return null;
 }
 
 /** สร้างรหัสไม่ซ้ำ — ให้มาแล้ว ไม่ต้องแก้ */

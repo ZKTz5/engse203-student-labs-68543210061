@@ -11,7 +11,8 @@ import * as service from '../services/requestService.js';
  * - ตอบ 200 พร้อมรายการ
  */
 export function listRequests(req, res) {
-  throw new Error('TODO W06-C1: listRequests');
+  const { status } = req.query;
+  res.status(200).json(service.findAll({ status }));
 }
 
 /**
@@ -20,7 +21,11 @@ export function listRequests(req, res) {
  * - ไม่พบ → 404 พร้อมข้อความ · พบ → 200 พร้อมข้อมูล
  */
 export function getRequest(req, res) {
-  throw new Error('TODO W06-C2: getRequest');
+  const request = service.findById(req.params.id);
+  if (!request) {
+    return res.status(404).json({ error: `ไม่พบคำร้องรหัส ${req.params.id}` });
+  }
+  res.status(200).json(request);
 }
 
 /**

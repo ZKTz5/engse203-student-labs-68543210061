@@ -4,6 +4,10 @@ import { validateRequest } from '../middleware/validateRequest.js';
 
 const router = Router();
 
+router.get('/', controller.listRequests);
+
+router.get('/:id', controller.getRequest);
+
 /**
  * TODO W06-R1 (CP02, CP04, CP05) · ประกาศ route ทั้งหมด
  *
