@@ -1,0 +1,22 @@
+import 'dotenv/config';
+
+/**
+ * TODO W07-CFG (CP10) · รวมค่าตั้งค่าไว้ที่เดียว
+ *
+ * ทำไมต้องมีไฟล์นี้ — เพื่อให้รู้ได้ทันทีว่าแอปต้องการค่าอะไรบ้าง
+ * และที่อื่นในโปรเจกต์จะได้ไม่ต้องอ่าน process.env กระจัดกระจาย
+ *
+ * ต้องมี: port (จาก PORT) · corsOrigin (จาก CORS_ORIGIN) · nodeEnv (จาก NODE_ENV)
+ * ทุกค่าต้องมีค่าเริ่มต้นเผื่อไม่มี .env
+ *
+ * คำใบ้: process.env.PORT ได้ค่าเป็น string เสมอ — ต้องแปลงเป็นตัวเลขเอง
+ */
+
+export const config = {
+  port: Number(process.env.PORT ?? 3001),
+  corsOrigin: process.env.CORS_ORIGIN ?? 'http://localhost:5173',
+  nodeEnv: process.env.NODE_ENV ?? 'development',
+  get isProduction() {
+    return this.nodeEnv === 'production';
+  },
+};
