@@ -12,6 +12,8 @@ PRAGMA foreign_keys = ON;
 -- TODO ①  ลบตารางเดิมก่อน เพื่อให้รันไฟล์นี้ซ้ำได้
 --         ⚠ ลำดับสำคัญ — ต้องลบตารางที่มี foreign key ก่อน
 --         คำใบ้: DROP TABLE IF EXISTS ...
+DROP TABLE IF EXISTS requests;
+DROP TABLE IF EXISTS users;
 
 -- TODO ②  สร้างตาราง users
 --         ต้องมี: id (PK, INTEGER, AUTOINCREMENT)
