@@ -33,7 +33,7 @@ export function createApp() {
     );
   }
   // ④ route
-  app.get('/', (req, res) => {
+  app.get('/api', (req, res) => {
     res.json({ message: 'Campus Service API is running', version: '2.0.0' });
   });
   app.use('/api/health', healthRoutes);
