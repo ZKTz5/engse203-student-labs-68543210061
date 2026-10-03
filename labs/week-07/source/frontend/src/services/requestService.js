@@ -17,8 +17,11 @@ export { ApiError };
  *   ใช้ encodeURIComponent() ป้องกันอักขระพิเศษ
  */
 export async function getRequests(options = {}) {
-  const res = await fetch('http://localhost:3001/api/requests');
-  return res.json();
+  if (options.scenario === 'error') throw new ApiError('LAB scenario: จำลองการโหลดไม่สำเร็จ', 500);
+  if (options.scenario === 'empty') return [];
+
+  const query = options.status ? `?status=${encodeURIComponent(options.status)}` : '';
+  return apiFetch(`/api/requests${query}`);
 }
 
 /**
