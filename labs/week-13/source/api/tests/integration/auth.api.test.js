@@ -25,10 +25,28 @@ describe('POST /api/auth/login', () => {
   // 🏫 TODO W13-LOGIN (CP50): อีเมลที่ไม่มี ต้องได้ข้อความ error เดียวกับรหัสผ่านผิด
 });
 
-describe('สิทธิ์ของ PUT / DELETE', () => {
-  test('ไม่มี token → 401', async () => {
-    const r = await request(app).put('/api/requests/REQ-001').send({ status: 'completed' });
+describe('สิทธิ์ของ PUT / DELETE', () => {   // มีอยู่แล้วใน starter — เติมต่อจาก test 'ไม่มี token → 401' ตรง TODO W13-AUTH
+  const put = () => request(app).put('/api/requests/REQ-001').send({ status: 'completed' });
+
+  test('token ที่เซ็นด้วย secret อื่น (ปลอม) → 401', async () => {
+    const r = await put().set('Authorization', `Bearer ${tokenFor('staff', 'not-the-real-secret')}`);
     expect(r.status).toBe(401);
+  });
+  test('token ถูกต้องแต่ไม่ใช่เจ้าหน้าที่ → 403', async () => {
+    const r = await put().set('Authorization', `Bearer ${tokenFor('requester')}`);
+    expect(r.status).toBe(403);
+  });
+  test('เจ้าหน้าที่ → PUT 200 และ DELETE 204', async () => {
+    const auth = `Bearer ${await loginAsStaff(app)}`;
+    await put().set('Authorization', auth).expect(200);
+    await request(app).delete('/api/requests/REQ-002').set('Authorization', auth).expect(204);
+  });
+  test('ส่งคำร้อง (POST) และดูรายการ (GET) ยังไม่ต้องเข้าสู่ระบบ', async () => {
+    await request(app).get('/api/requests').expect(200);
+    await request(app).post('/api/requests').send({
+      requesterName: 'นักศึกษา ทั่วไป', requestType: 'แจ้งซ่อม', location: 'ห้อง 205',
+      details: 'ไฟห้องเรียนดับสองดวง', priority: 'normal',
+    }).expect(201);
   });
 
   // 🏫 TODO W13-AUTH (CP51): เพิ่ม
