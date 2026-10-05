@@ -24,6 +24,7 @@ const valid = {
 };
 
 describe('GET /api/requests', () => {
+  
   test('คืน array 5 รายการจากข้อมูลตั้งต้น พร้อม 200', async () => {
     const r = await request(app).get('/api/requests');
     expect(r.status).toBe(200);
@@ -71,11 +72,65 @@ describe('POST /api/requests', () => {
   });
 });
 
+  // 🐞 regression test — BUG #1: ลบแล้วเพิ่มใหม่ ได้ 500 (รหัสซ้ำ) · ใส่ใน describe POST
+  test('ลบรายการกลาง แล้วเพิ่มใหม่ → 201 และรหัสไม่ซ้ำของเดิม', async () => {
+    await request(app).delete('/api/requests/REQ-002').expect(204);
+    const r = await request(app).post('/api/requests').send(valid);
+    expect(r.status).toBe(201);
+    const ids = (await request(app).get('/api/requests')).body.map((x) => x.id);
+    expect(new Set(ids).size).toBe(ids.length);
+  });
+
+describe('PUT /api/requests/:id', () => {
+  test('เปลี่ยนสถานะ → 200 และค่าใหม่ถูกบันทึก', async () => {
+    const r = await request(app).put('/api/requests/REQ-001').send({ status: 'completed' });
+    expect(r.status).toBe(200);
+    expect(r.body.status).toBe('completed');
+  });
+  test('สถานะนอกรายการ → 400', async () => {
+    const r = await request(app).put('/api/requests/REQ-001').send({ status: 'done' });
+    expect(r.status).toBe(400);
+  });
+  // 🐞 regression test — BUG #3: เปลี่ยนสถานะคำร้องที่ไม่มีอยู่ ได้ 500
+  test('คำร้องที่ไม่มีอยู่ → 404 (ไม่ใช่ 500)', async () => {
+    const r = await request(app).put('/api/requests/REQ-999').send({ status: 'completed' });
+    expect(r.status).toBe(404);
+  });
+});
+
 // 🏫 TODO W12-INTEG (CP46): เพิ่ม test ของ PUT และ DELETE
 //   - PUT เปลี่ยนสถานะ → 200 และค่าใหม่ถูกบันทึก
 //   - PUT สถานะนอกรายการ → 400
 //   - DELETE แล้ว GET ซ้ำ → 404
 //   แล้วรัน npm run coverage → ดูว่าไฟล์ไหน/บรรทัดไหนยังไม่มี test วิ่งผ่าน
+
+describe('DELETE /api/requests/:id', () => {
+  test('ลบแล้ว GET ซ้ำ → 404', async () => {
+    await request(app).delete('/api/requests/REQ-003').expect(204);
+    await request(app).get('/api/requests/REQ-003').expect(404);
+  });
+  test('ลบรายการที่ไม่มี → 404', async () => {
+    const r = await request(app).put('/api/requests/REQ-999').send({ status: 'completed' });
+    await request(app).delete('/api/requests/REQ-999').expect(404);
+  });
+});
+
+describe('เส้นทางที่ไม่มีอยู่', () => {
+  test('GET /api/nope → 404 เป็น JSON', async () => {
+    const r = await request(app).get('/api/nope');
+    expect(r.status).toBe(404);
+    expect(r.body.error).toMatch(/ไม่พบเส้นทาง/);
+  });
+});
+
+describe('ข้อมูลผิดรูปแบบ', () => {
+  test('ส่ง JSON ที่เสีย → 400 เป็น JSON ไม่ใช่ 500', async () => {
+    const r = await request(app).post('/api/requests')
+      .set('Content-Type', 'application/json').send('{"requesterName": ');
+    expect(r.status).toBe(400);
+    expect(r.body).toHaveProperty('error');
+  });
+});
 
 // 🏫 TODO W12-DEBUG (CP47): regression test ของ bug จาก BUG_REPORTS.md
 //   เขียน test ที่ "ทำซ้ำอาการ" ก่อน → ต้อง fail → แก้โค้ด → test ผ่าน

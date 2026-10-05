@@ -8,4 +8,16 @@ describe('summarizeRequests', () => {
 
   // 🏫 TODO W12-DEBUG (CP47 · BUG #2): เพิ่ม test ที่ใช้ข้อมูลหน้าตาเดียวกับที่ API ส่งมา
   //   เปิด DevTools → Network → GET /api/requests → ดูค่า status จริง แล้วคัดลอกมาใช้
+  
+  // 🐞 regression test — BUG #2 · ข้อมูลรูปแบบเดียวกับที่ GET /api/requests ส่งมา
+  const sample = [
+    { id: 'REQ-001', status: 'pending' },
+    { id: 'REQ-002', status: 'in-progress' },
+    { id: 'REQ-003', status: 'completed' },
+    { id: 'REQ-004', status: 'pending' },
+  ];
+  test('นับครบทุกสถานะ', () => {
+    expect(summarizeRequests(sample)).toEqual({ total: 4, pending: 2, inProgress: 1, completed: 1 });
+  });
+
 });

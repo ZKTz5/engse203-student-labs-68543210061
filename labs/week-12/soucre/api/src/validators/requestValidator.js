@@ -34,7 +34,7 @@ export function validateRequestInput(input) {
   if (!readText(input.location)) {
     errors.push('กรุณาระบุสถานที่');
   }
-  if (readText(input.details).length <= MIN_DETAILS) {
+  if (readText(input.details).length < MIN_DETAILS) {
     errors.push(`รายละเอียดต้องมีอย่างน้อย ${MIN_DETAILS} ตัวอักษร`);
   }
   if (!PRIORITIES.includes(input.priority)) {

@@ -9,7 +9,7 @@ export function summarizeRequests(requests) {
   return {
     total: requests.length,
     pending: count('pending'),
-    inProgress: count('in progress'),
+    inProgress: count('in-progress'),
     completed: count('completed'),
   };
 }
