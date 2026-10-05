@@ -19,9 +19,20 @@ export const STATUSES = ['pending', 'in-progress', 'completed'];
 
 export const MIN_NAME = 2;
 export const MIN_DETAILS = 10;
+export const MAX_NAME = 100;
+export const MAX_LOCATION = 100;
+export const MAX_DETAILS = 1000;
 
 function readText(value) {
   return typeof value === 'string' ? value.trim() : '';
+}
+
+function checkText(value, label, { min = 1, max }) {
+  if (typeof value !== 'string') return `${label}ต้องเป็นข้อความ`;
+  const length = value.trim().length;
+  if (length < min) return min > 1 ? `${label}ต้องมีอย่างน้อย ${min} ตัวอักษร` : `กรุณาระบุ${label}`;
+  if (length > max) return `${label}ต้องไม่เกิน ${max} ตัวอักษร`;
+  return null;
 }
 
 export function validateRequestInput(input) {
@@ -29,7 +40,13 @@ export function validateRequestInput(input) {
     return ['ต้องส่งข้อมูลคำร้องมาด้วย'];
   }
 
-  const errors = [];
+  const errors = [
+    checkText(input.requesterName, 'ชื่อผู้แจ้ง', { min: MIN_NAME, max: MAX_NAME }),
+    REQUEST_TYPES.includes(input.requestType) ? null : 'ประเภทคำร้องไม่ถูกต้อง',
+    checkText(input.location, 'สถานที่', { max: MAX_LOCATION }),
+    checkText(input.details, 'รายละเอียด', { min: MIN_DETAILS, max: MAX_DETAILS }),
+    PRIORITIES.includes(input.priority) ? null : 'ความเร่งด่วนต้องเป็น normal หรือ urgent',
+  ];
   if (readText(input.requesterName).length < MIN_NAME) {
     errors.push(`ชื่อผู้แจ้งต้องมีอย่างน้อย ${MIN_NAME} ตัวอักษร`);
   }
@@ -45,7 +62,7 @@ export function validateRequestInput(input) {
   if (!PRIORITIES.includes(input.priority)) {
     errors.push('ความเร่งด่วนต้องเป็น normal หรือ urgent');
   }
-  return errors;
+  return errors.filter(Boolean);
 }
 
 /** สถานะที่ PUT /api/requests/:id รับได้ */

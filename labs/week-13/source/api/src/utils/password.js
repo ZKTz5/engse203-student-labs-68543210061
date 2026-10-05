@@ -16,7 +16,9 @@ const KEY_LENGTH = 64;
 
 export function hashPassword(plain) {
   // TODO: สุ่ม salt → scryptSync → คืน `scrypt$${salt}$${hash}`
-  throw new Error('TODO W13-HASH: ยังไม่ได้เขียน hashPassword');
+  const salt = randomBytes(16).toString('hex');
+  const hash = scryptSync(plain, salt, KEY_LENGTH).toString('hex');
+  return `scrypt$${salt}$${hash}`;
 }
 
 export function verifyPassword(plain, stored) {
@@ -24,5 +26,10 @@ export function verifyPassword(plain, stored) {
   //       → scryptSync(plain, salt, ความยาวของ hash เดิม)
   //       → เทียบด้วย timingSafeEqual (ไม่ใช่ ===)  ← ทำไม? อ่านเอกสารบทที่ 4
   //       hash ผิดรูปแบบ → คืน false (ห้ามโยน error)
-  throw new Error('TODO W13-HASH: ยังไม่ได้เขียน verifyPassword');
+  const [scheme, salt, hashHex] = String(stored ?? '').split('$');
+  if (scheme !== 'scrypt' || !salt || !hashHex) return false;
+  const expected = Buffer.from(hashHex, 'hex');
+  const actual = scryptSync(String(plain), salt, expected.length);
+  // timingSafeEqual ใช้เวลาเท่ากันไม่ว่าจะผิดตัวที่เท่าไร — กันการเดาจากเวลาที่ใช้ตอบ
+  return actual.length === expected.length && timingSafeEqual(actual, expected);
 }
