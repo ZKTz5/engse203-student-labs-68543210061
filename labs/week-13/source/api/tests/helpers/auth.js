@@ -1,6 +1,7 @@
 import request from 'supertest';
 import jwt from 'jsonwebtoken';
 import { config } from '../../src/config.js';
+import { loginAsStaff } from '../helpers/auth.js';
 
 /** บัญชีเจ้าหน้าที่จาก schema.sql (ใช้เฉพาะพัฒนาและทดสอบ) */
 export const STAFF = { email: 'staff@rmutl.ac.th', password: 'staff1234' };

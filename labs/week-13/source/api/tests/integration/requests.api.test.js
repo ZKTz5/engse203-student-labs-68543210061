@@ -2,6 +2,7 @@ import { describe, test, expect, beforeEach } from 'vitest';
 import request from 'supertest';
 import { createApp } from '../../src/app.js';
 import { loadSeed } from '../../src/services/requestService.js';
+import { loginAsStaff } from '../helpers/auth.js';
 
 /**
  * Integration test — ยิง HTTP จริงผ่านทุกชั้น: route → controller → service → SQLite
@@ -11,8 +12,6 @@ import { loadSeed } from '../../src/services/requestService.js';
 
 //const app = createApp();
 //beforeEach(async () => { await loadSeed(); });
-
-import { loginAsStaff } from '../helpers/auth.js';
 
 const app = createApp();
 let auth;   // Week 13 — PUT/DELETE ต้องมี token ของเจ้าหน้าที่
@@ -75,7 +74,7 @@ describe('POST /api/requests', () => {
   });
   // 🐞 regression test — BUG #1: ลบแล้วเพิ่มใหม่ ได้ 500 (รหัสซ้ำ)
   test('ลบรายการกลาง แล้วเพิ่มใหม่ → 201 และรหัสไม่ซ้ำของเดิม', async () => {
-    await request(app).delete('/api/requests/REQ-002').expect(204);
+    await request(app).delete('/api/requests/REQ-002').set(auth).expect(204);
     const r = await request(app).post('/api/requests').send(valid);
     expect(r.status).toBe(201);
     const ids = (await request(app).get('/api/requests')).body.map((x) => x.id);

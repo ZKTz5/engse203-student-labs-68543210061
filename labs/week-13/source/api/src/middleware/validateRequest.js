@@ -7,7 +7,8 @@ import { validateRequestInput } from '../validators/requestValidator.js';
 export function validateRequest(req, res, next) {
   const errors = validateRequestInput(req.body);
   if (errors.length > 0) {
-    return res.status(400).json({ error: 'ข้อมูลคำร้องไม่ถูกต้อง', details: errors });
+    return res.status(400).json({
+      error: 'ข้อมูลคำร้องไม่ถูกต้อง', details: errors });
   }
   next();
 }

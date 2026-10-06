@@ -16,8 +16,8 @@ const KEY_LENGTH = 64;
 
 export function hashPassword(plain) {
   // TODO: สุ่ม salt → scryptSync → คืน `scrypt$${salt}$${hash}`
-  const salt = randomBytes(16).toString('hex');
-  const hash = scryptSync(plain, salt, KEY_LENGTH).toString('hex');
+  const salt = randomBytes(16).toString('hex');                     // 32 ตัวอักษร
+  const hash = scryptSync(plain, salt, KEY_LENGTH).toString('hex'); // 128 ตัวอักษร
   return `scrypt$${salt}$${hash}`;
 }
 

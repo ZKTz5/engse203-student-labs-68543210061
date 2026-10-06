@@ -23,6 +23,13 @@ describe('POST /api/auth/login', () => {
   });
 
   // 🏫 TODO W13-LOGIN (CP50): อีเมลที่ไม่มี ต้องได้ข้อความ error เดียวกับรหัสผ่านผิด
+  test('รหัสผ่านผิด กับ อีเมลที่ไม่มี → 401 ข้อความเดียวกัน', async () => {
+  const wrong = await request(app).post('/api/auth/login').send({ ...STAFF, password: 'nope1234' });
+  const unknown = await request(app).post('/api/auth/login').send({ email: 'ghost@rmutl.ac.th', password: 'nope1234' });
+  expect(wrong.status).toBe(401);
+  expect(unknown.status).toBe(401);
+  expect(wrong.body.error).toBe(unknown.body.error);
+});
 });
 
 describe('สิทธิ์ของ PUT / DELETE', () => {   // มีอยู่แล้วใน starter — เติมต่อจาก test 'ไม่มี token → 401' ตรง TODO W13-AUTH
@@ -48,6 +55,7 @@ describe('สิทธิ์ของ PUT / DELETE', () => {   // มีอย�
       details: 'ไฟห้องเรียนดับสองดวง', priority: 'normal',
     }).expect(201);
   });
+});
 
   // 🏫 TODO W13-AUTH (CP51): เพิ่ม
   //   - token ที่ไม่ใช่เจ้าหน้าที่ → 403      ใช้ tokenFor('requester')
@@ -55,4 +63,4 @@ describe('สิทธิ์ของ PUT / DELETE', () => {   // มีอย�
   //   - เจ้าหน้าที่ → PUT 200 และ DELETE 204  ใช้ await loginAsStaff(app)
   //   ⚠ หลังผูก authenticate แล้ว test ของ PUT/DELETE ใน requests.api.test.js จะพัง (401)
   //     — นั่นคือสัญญาณว่า requirement เปลี่ยน: แก้ test ให้เข้าสู่ระบบก่อน
-});
+
